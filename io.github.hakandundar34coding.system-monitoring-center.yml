@@ -57,4 +57,6 @@ modules:
       - type: git
         url: https://github.com/hakandundar34coding/system-monitoring-center.git
         commit: 4d9424833bd36cfd4fe7521139fe57faf9ee626b
+      - type: patch
+        path: fix-appdata.patch
 
