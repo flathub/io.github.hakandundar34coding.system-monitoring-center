@@ -6,6 +6,8 @@
         {
             "name": "python3-pybind11",
             "buildsystem": "simple",
+            "//note": "Since it is just a build dependenciy, we can remove it afther the build with cleanup command",
+            "cleanup": ["*"],
             "build-commands": [
                 "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pybind11\" --no-build-isolation"
             ],
