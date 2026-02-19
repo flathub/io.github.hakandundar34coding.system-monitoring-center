@@ -1,33 +1,33 @@
 app-id: io.github.hakandundar34coding.system-monitoring-center
 runtime: org.gnome.Platform
-runtime-version: '45'
+runtime-version: '49'
 sdk: org.gnome.Sdk
 command: system-monitoring-center
 
 finish-args:
-  # For X11 shared memory access (higher performance for X11)
   - --share=ipc
-  # For Wayland access
-  - --socket=wayland
-  # For X11 fallback
-  - --socket=fallback-x11
+  - --socket=x11
   # For monitoring data download/upload speed on network cards
   - --device=all
   # For monitoring data download/upload speed on network cards
   - --share=network
   # For host OS commands access (such as 'systemctl' for service details, 'ls /proc' for process list, 'ps' for process information, etc.)
   - --talk-name=org.freedesktop.Flatpak
-  # For reading several files (systemd service files, process information in '/proc' folder, etc.) of host OS
-  - --filesystem=host:ro
 
 cleanup:
   - /include
   - /lib/pkgconfig
+  - /man
   - /share/man
   - /share/pkgconfig
   - /share/bash-completion
+  - '*.la'
+  - '*.a'
 
 modules:
+
+  - pypi-dependencies.json
+  - tkinter.json
 
   # For using hardware database of "hwdata"
   - name: hwdata
@@ -35,8 +35,8 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.375.tar.gz
-        sha256: 69ffbfe4801c12c2d66d51f98044beec35afa406b1baa619c57b25a9b62b43a0
+        url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.403.tar.gz
+        sha256: 77d0a69e5558d16d33bbb510a09093deaf11c882baf9ef6ec5f18a8ef96e2c13
 
   # For getting IPv4 and IPv6 addresses by using 'ip a show [network_card]' command
   - name: iproute2
@@ -47,8 +47,8 @@ modules:
       - CONFDIR=${FLATPAK_DEST}/etc/iproute2
     sources:
       - type: archive
-        url: https://github.com/shemminger/iproute2/archive/refs/tags/v6.5.0.tar.gz
-        sha256: a336d4d66e390c51564980152ffdafa0e214eb6e447c12582eafffb6d836b41d
+        url: https://github.com/iproute2/iproute2/archive/refs/tags/v6.18.0.tar.gz
+        sha256: eff48ad35d039735ab318749868587115b524dc44ef49e47e52ca3665e8f05f1
 
   # For System Monitoring Center
   - name: system-monitoring-center
@@ -56,7 +56,5 @@ modules:
     sources:
       - type: git
         url: https://github.com/hakandundar34coding/system-monitoring-center.git
-        commit: 4d9424833bd36cfd4fe7521139fe57faf9ee626b
-      - type: patch
-        path: fix-appdata.patch
+        commit: 1a05aca99547d5e5fd905f608e711c57bea792a5
 
