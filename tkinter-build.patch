@@ -2,7 +2,7 @@ commit 3bbb09a0598fc976d2bf8dac932b27740086c1bd
 Author: Hubert Figuière <hub@figuiere.net>
 Date:   Sun Dec 21 17:49:43 2025 -0500
 
-    Port to Python 3.13
+    Port to Python 3.15
     
     Signed-off-by: Hubert Figuière <hub@figuiere.net>
 
@@ -173,12 +173,12 @@ index f379305..cf7b6ad 100644
                      libraries=['tcl8.6', 'tk8.6'],
                      sources=['_tkinter.c'],
 -                    include_dirs=['/app/include/'])
-+                    include_dirs=['/app/include/', '/usr/include/python3.13/internal/'])
++                    include_dirs=['/app/include/', '/usr/include/python3.15/internal/'])
  
  setup(
      name='tkinter-standalone',
 -    version='3.11',
-+    version='3.13',
++    version='3.15',
      description='Tkinter packaged as an external package for flatpak.',
      ext_modules=[module1],
      packages=["tkinter"]
